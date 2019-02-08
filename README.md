@@ -18,3 +18,4 @@ If you want to suggest another data structure to be added, please, [open a new i
 11. Patricia Trie 
 12. Tango Tree
 13. B+ tree
+14. Sparse Dictionary
