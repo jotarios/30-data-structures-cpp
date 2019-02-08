@@ -1,10 +1,10 @@
 #include "OrderedLinkedList.h"
 #include "OrderedLinkedList.cpp"
 
-using namespace DataStructures;
-
 int main(int argc, const char *argv[]) {
   OrderedLinkedList<int> integerList;
+
+  std::cout << integerList.empty() << "\n";
 
   integerList.insert(20);
   integerList.insert(10);
@@ -18,11 +18,21 @@ int main(int argc, const char *argv[]) {
 
   integerList.print();
 
+  integerList.reverse();
+
+  integerList.print();
+
   integerList.remove(300);
   integerList.remove(1);
   integerList.remove(100);
 
   integerList.print();
+
+  integerList.reverse();
+
+  integerList.print();
+
+  std::cout << integerList.empty() << "\n";
 
   return 0;
 }
