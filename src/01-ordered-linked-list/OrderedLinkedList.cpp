@@ -1,7 +1,5 @@
 #include "OrderedLinkedList.h"
 
-using namespace DataStructures;
-
 /**
  * Check if the data exists in the ordered linked list
  *
@@ -61,21 +59,54 @@ void OrderedLinkedList<AnyObject>::remove(AnyObject data) {
   }
 }
 
+/**
+ * Reverse the order of the list
+ *
+ * @tparam AnyObject
+ */
 template<class AnyObject>
 void OrderedLinkedList<AnyObject>::reverse() {
+  Node* init = this->head;
+  Node* next = nullptr;
+  Node* temp = nullptr;
 
+  while (init) {
+    temp = init->next;
+    init->next = next;
+    next = init;
+    init = temp;
+  }
+
+  this->head = next;
 };
 
+/**
+ * Check if the ordered linked list is empty
+ *
+ * @tparam AnyObject
+ * @return
+ */
 template<class AnyObject>
 bool OrderedLinkedList<AnyObject>::empty() {
-
+  return !this->head;
 };
 
 template<class AnyObject>
 void OrderedLinkedList<AnyObject>::print() {
-  for (auto *node = this->head; node != nullptr; node = node->next) {
-    std::cout << node->data << " ";
+  for (auto it = this->begin(); it != this->end(); it++) {
+    std::cout << *it << " ";
   }
 
   std::cout << "\n";
 };
+
+// Iterators
+template<class AnyObject>
+ForwardIterator<AnyObject> OrderedLinkedList<AnyObject>::begin() {
+  return ForwardIterator<AnyObject>(this->head);
+}
+
+template<class AnyObject>
+ForwardIterator<AnyObject> OrderedLinkedList<AnyObject>::end() {
+  return ForwardIterator<AnyObject>(nullptr);
+}
