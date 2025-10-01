@@ -15,7 +15,8 @@ If you want to suggest another data structure to be added, please, [open a new i
 8. AVL Tree
 9. Splay Tree
 10. Red-Black Tree
-11. Patricia Trie 
-12. Tango Tree
-13. B+ tree
-14. Sparse Dictionary
+11. Trie
+12. Patricia Trie
+13. Tango Tree
+14. B+ tree
+15. Sparse Dictionary

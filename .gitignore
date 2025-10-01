@@ -122,3 +122,8 @@ modules.xml
 CMakeLists.txt
 .idea/codeStyles/Project.xml
 .idea/vcs.xml
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride

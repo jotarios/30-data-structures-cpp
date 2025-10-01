@@ -10,16 +10,15 @@
  */
 template<class AnyObject>
 bool OrderedLinkedList<AnyObject>::find(AnyObject data, OrderedLinkedList<AnyObject>::Node **&pointer) {
-  // If necessary, operators should to be override in AnyObject.
-  while ((*pointer) && (*pointer)->data <= data) {
-    if ((*pointer)->data == data) {
-      return true;
+    while ((*pointer) && (*pointer)->data <= data) {
+        if ((*pointer)->data == data) {
+            return true;
+        }
+
+        pointer = &((*pointer)->next);
     }
 
-    pointer = &((*pointer)->next);
-  }
-
-  return false;
+    return false;
 }
 
 /**
@@ -30,14 +29,16 @@ bool OrderedLinkedList<AnyObject>::find(AnyObject data, OrderedLinkedList<AnyObj
  */
 template<class AnyObject>
 void OrderedLinkedList<AnyObject>::insert(AnyObject data) {
-  Node *nodeToBeInserted = new Node{data, nullptr};
-  Node **pointer = &head;
+    Node *nodeToBeInserted = new Node{data, nullptr};
+    Node **pointer = &head;
 
-  // Avoid duplicated data
-  if (!find(data, pointer)) {
+    while ((*pointer) && (*pointer)->data <= data) {
+        pointer = &((*pointer)->next);
+    }
+
     nodeToBeInserted->next = (*pointer);
     (*pointer) = nodeToBeInserted;
-  }
+    list_size++;
 }
 
 /**
@@ -49,14 +50,15 @@ void OrderedLinkedList<AnyObject>::insert(AnyObject data) {
 
 template<class AnyObject>
 void OrderedLinkedList<AnyObject>::remove(AnyObject data) {
-  Node **pointer = &head;
+    Node **pointer = &head;
 
-  if (find(data, pointer)) {
-    Node *temp;
-    temp = (*pointer);
-    (*pointer) = (*pointer)->next;
-    delete temp;
-  }
+    if (find(data, pointer)) {
+        Node *temp;
+        temp = (*pointer);
+        (*pointer) = (*pointer)->next;
+        delete temp;
+        list_size--;
+    }
 }
 
 /**
@@ -66,18 +68,18 @@ void OrderedLinkedList<AnyObject>::remove(AnyObject data) {
  */
 template<class AnyObject>
 void OrderedLinkedList<AnyObject>::reverse() {
-  Node* init = this->head;
-  Node* next = nullptr;
-  Node* temp = nullptr;
+    Node *init = this->head;
+    Node *next = nullptr;
+    Node *temp = nullptr;
 
-  while (init) {
-    temp = init->next;
-    init->next = next;
-    next = init;
-    init = temp;
-  }
+    while (init) {
+        temp = init->next;
+        init->next = next;
+        next = init;
+        init = temp;
+    }
 
-  this->head = next;
+    this->head = next;
 };
 
 /**
@@ -88,25 +90,30 @@ void OrderedLinkedList<AnyObject>::reverse() {
  */
 template<class AnyObject>
 bool OrderedLinkedList<AnyObject>::empty() {
-  return !this->head;
+    return !this->head;
 };
 
 template<class AnyObject>
-void OrderedLinkedList<AnyObject>::print() {
-  for (auto it = this->begin(); it != this->end(); it++) {
-    std::cout << *it << " ";
-  }
+std::size_t OrderedLinkedList<AnyObject>::size() const {
+    return list_size;
+}
 
-  std::cout << "\n";
+template<class AnyObject>
+void OrderedLinkedList<AnyObject>::print() {
+    for (auto it = this->begin(); it != this->end(); it++) {
+        std::cout << *it << " ";
+    }
+
+    std::cout << "\n";
 };
 
 // Iterators
 template<class AnyObject>
 ForwardIterator<AnyObject> OrderedLinkedList<AnyObject>::begin() {
-  return ForwardIterator<AnyObject>(this->head);
+    return ForwardIterator<AnyObject>(this->head);
 }
 
 template<class AnyObject>
 ForwardIterator<AnyObject> OrderedLinkedList<AnyObject>::end() {
-  return ForwardIterator<AnyObject>(nullptr);
+    return ForwardIterator<AnyObject>(nullptr);
 }

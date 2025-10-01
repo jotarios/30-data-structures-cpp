@@ -1,38 +1,34 @@
+#include <cassert>
 #include "OrderedLinkedList.h"
 #include "OrderedLinkedList.cpp"
 
 int main(int argc, const char *argv[]) {
-  OrderedLinkedList<int> integerList;
+    OrderedLinkedList<int> integers;
 
-  std::cout << integerList.empty() << "\n";
+    assert(integers.empty());
+    assert(integers.size() == 0);
 
-  integerList.insert(20);
-  integerList.insert(10);
-  integerList.insert(20);
-  integerList.insert(2);
-  integerList.insert(2);
-  integerList.insert(2);
-  integerList.insert(40);
-  integerList.insert(1);
-  integerList.insert(100);
+    integers.insert(20);
+    integers.insert(10);
+    integers.insert(20);
+    integers.insert(2);
+    integers.insert(2);
+    integers.insert(2);
+    integers.insert(40);
+    integers.insert(1);
+    integers.insert(100);
+    integers.insert(100);
 
-  integerList.print();
+    assert(integers.size() == 10);
 
-  integerList.reverse();
+    integers.remove(1);
+    integers.remove(100);
 
-  integerList.print();
+    assert(integers.size() == 8);
 
-  integerList.remove(300);
-  integerList.remove(1);
-  integerList.remove(100);
+    integers.print();
 
-  integerList.print();
+    assert(!integers.empty());
 
-  integerList.reverse();
-
-  integerList.print();
-
-  std::cout << integerList.empty() << "\n";
-
-  return 0;
+    return 0;
 }
